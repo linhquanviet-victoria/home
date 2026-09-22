@@ -899,8 +899,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     fetch(CALENDAR_WEBHOOK_URL + '?' + calParams.toString(), { mode: 'no-cors' }).catch(function() {});
   }
 
-  // Friendly bilingual confirmation — goes to the kitchen (linhquanviet@gmail.com)
-  // AND, via cc, to the customer's email as their confirmation.
+  // Order details emailed to the kitchen (linhquanviet@gmail.com) via Web3Forms.
   const message =
     'Cảm ơn bạn đã đặt món tại Linh Quán Việt – Bếp Cô Lan! ❤️\n' +
     'Thank you for ordering from Linh Quán Việt – Bếp Cô Lan!\n\n' +
@@ -928,11 +927,12 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     access_key: WEB3FORMS_KEY,
     subject: '🍜 Đơn / Order – ' + form.name.value + ' – ' + form.pickupDay.value + ' ' + form.pickupTime.value + ' (' + (isDelivery ? 'DELIVERY' : 'PICKUP') + ')',
     from_name: 'Linh Quán Việt – Bếp Cô Lan',
-    email: email,   // Reply-To = customer
-    cc: email,      // send a confirmation copy to the customer's email
+    email: email,   // Reply-To = customer (so you can reply straight to them)
     message: message,
     botcheck: ''
   };
+  // Note: the CUSTOMER confirmation email is sent by the Google Apps Script
+  // (from linhquanviet@gmail.com) — more reliable than Web3Forms cc.
 
   if (WEB3FORMS_KEY === 'PASTE-YOUR-WEB3FORMS-KEY-HERE') {
     console.log('DEMO ORDER (no Web3Forms key set):', payload);
