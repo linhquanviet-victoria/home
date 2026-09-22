@@ -176,6 +176,28 @@ section { scroll-margin-top: 86px; }
 .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--green); }
 .form-row textarea { resize: vertical; min-height: 70px; }
 .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* pickup calendar */
+.cal-hint { font-weight: 700; color: var(--red); text-transform: none; letter-spacing: 0; font-size: 0.72rem; }
+.cal-card { background: var(--white); border: 1.5px solid var(--cream-2); border-radius: var(--radius-lg); overflow: hidden; }
+.cal-header { background: var(--green); color: var(--white); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+.cal-header h4 { font-size: 1rem; font-weight: 800; }
+.cal-nav-btn { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; color: var(--white); font-size: 1.2rem; line-height: 1; cursor: pointer; transition: background 0.2s; }
+.cal-nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.38); }
+.cal-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.cal-body { padding: 14px 16px 16px; }
+.cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 6px; }
+.cal-weekdays span { text-align: center; font-size: 0.72rem; font-weight: 800; color: var(--text-light); padding: 4px 0; }
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.86rem; font-weight: 700; color: var(--text); border-radius: 50%; cursor: pointer; border: none; background: none; font-family: inherit; transition: all 0.15s; }
+.cal-day:hover:not(:disabled):not(.cal-day-empty):not(.cal-day-off) { background: #eef6ef; color: var(--green); }
+.cal-day.selected { background: var(--red) !important; color: var(--white) !important; box-shadow: 0 4px 12px rgba(200,54,44,0.4); }
+.cal-day.today { border: 2px solid var(--green); color: var(--green); }
+.cal-day.today.selected { border-color: transparent; }
+.cal-day-empty { cursor: default; }
+.cal-day-off { color: #cfcabf !important; cursor: not-allowed; }
+.cal-selected { margin-top: 12px; text-align: center; font-weight: 800; color: var(--green); font-size: 0.92rem; }
+.gcal-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: #4285F4; color: #fff; text-decoration: none; font-weight: 800; padding: 12px 22px; border-radius: var(--radius-pill); transition: all 0.2s; }
+.gcal-btn:hover { background: #3367d6; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 .radio-group { display: flex; gap: 12px; }
 .radio-opt { flex: 1; position: relative; }
 .radio-opt input { position: absolute; opacity: 0; }
@@ -343,7 +365,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
     <div class="section-head">
       <span class="section-tag"><span data-lang="vi">Đặt món</span><span data-lang="en">Order Online</span></span>
       <h2><span data-lang="vi">Đặt hàng &amp; giao tận nơi</span><span data-lang="en">Order &amp; delivery</span></h2>
-      <p><span data-lang="vi">Chọn món ở trên, điền thông tin, đơn hàng sẽ được gửi tới bếp. Chúng tôi sẽ gọi/nhắn tin xác nhận.</span><span data-lang="en">Add items above, fill in your details, and your order is sent to the kitchen. We'll call/text to confirm.</span></p>
+      <p><span data-lang="vi">Chọn món ở trên, điền thông tin — đơn hàng sẽ được gửi tới bếp và email xác nhận sẽ gửi tới bạn.</span><span data-lang="en">Add items above, fill in your details — your order goes to the kitchen and a confirmation is emailed to you.</span></p>
     </div>
 
     <div class="order-grid">
@@ -379,20 +401,30 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
               <input type="tel" name="phone" required>
             </div>
             <div class="form-row">
-              <label>Email</label>
-              <input type="email" name="email">
+              <label>Email <span data-lang="vi">(nhận xác nhận)</span><span data-lang="en">(for confirmation)</span> *</label>
+              <input type="email" name="email" required>
             </div>
           </div>
 
-          <div class="form-2col">
-            <div class="form-row">
-              <label><span data-lang="vi">Ngày lấy</span><span data-lang="en">Pickup day</span> *</label>
-              <select name="pickupDay" id="pickupDay" required></select>
+          <div class="form-row">
+            <label><span data-lang="vi">Ngày lấy</span><span data-lang="en">Pickup day</span> * <span class="cal-hint"><span data-lang="vi">— chỉ Thứ 6, Thứ 7, Thứ 2</span><span data-lang="en">— Fri, Sat, Mon only</span></span></label>
+            <div class="cal-card" id="pickupCal">
+              <div class="cal-header">
+                <button type="button" class="cal-nav-btn" id="calPrev" aria-label="Previous month">‹</button>
+                <h4 id="calMonthLabel">—</h4>
+                <button type="button" class="cal-nav-btn" id="calNext" aria-label="Next month">›</button>
+              </div>
+              <div class="cal-body">
+                <div class="cal-weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+                <div class="cal-days" id="calDays"></div>
+                <div class="cal-selected" id="calSelected"><span data-lang="vi">Chưa chọn ngày</span><span data-lang="en">No day selected yet</span></div>
+              </div>
             </div>
-            <div class="form-row">
-              <label><span data-lang="vi">Giờ lấy</span><span data-lang="en">Pickup time</span> *</label>
-              <select name="pickupTime" id="pickupTime" required></select>
-            </div>
+            <input type="hidden" name="pickupDay" id="pickupDay">
+          </div>
+          <div class="form-row">
+            <label><span data-lang="vi">Giờ lấy</span><span data-lang="en">Pickup time</span> *</label>
+            <select name="pickupTime" id="pickupTime" required></select>
           </div>
 
           <div class="form-row">
@@ -430,6 +462,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
           <div class="check">✅</div>
           <h3><span data-lang="vi">Cảm ơn bạn!</span><span data-lang="en">Thank you!</span></h3>
           <p id="successMsg"></p>
+          <div><a id="gcalLink" href="#" target="_blank" rel="noopener" class="gcal-btn">📅 <span data-lang="vi">Thêm vào Google Calendar</span><span data-lang="en">Add to Google Calendar</span></a></div>
           <button class="btn-submit" style="margin-top:20px;" onclick="location.reload()"><span data-lang="vi">Đặt đơn khác</span><span data-lang="en">New order</span></button>
         </div>
       </div>
@@ -479,6 +512,10 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
             <div class="cw-ic">🕘</div>
             <div><strong><span data-lang="vi">Giờ mở bán</span><span data-lang="en">Open hours</span></strong><span><span data-lang="vi">Thứ 6, Thứ 7, Thứ 2</span><span data-lang="en">Fri, Sat, Mon</span> · 9AM – 7PM</span></div>
           </div>
+          <div class="contact-way">
+            <div class="cw-ic">📘</div>
+            <div><strong>Facebook</strong><a href="https://www.facebook.com/linh.quan.victoria" target="_blank" rel="noopener">facebook.com/linh.quan.victoria</a></div>
+          </div>
         </div>
       </div>
       <div class="map-embed">
@@ -493,7 +530,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
   <div class="script">Bếp Cô Lan</div>
   <p><strong>Linh Quán Việt</strong> · <span data-lang="vi">Món Việt truyền thống làm tại nhà</span><span data-lang="en">Traditional homemade Vietnamese food</span> 🇻🇳❤️</p>
   <p>1012 Tillicum Road, Victoria, BC · 250-891-3749 · linhquanviet@gmail.com</p>
-  <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="fb-link">📘 <span data-lang="vi">Theo dõi trên Facebook</span><span data-lang="en">Follow us on Facebook</span></a>
+  <a href="https://www.facebook.com/linh.quan.victoria" target="_blank" rel="noopener" class="fb-link">📘 <span data-lang="vi">Theo dõi trên Facebook</span><span data-lang="en">Follow us on Facebook</span></a>
   <p style="margin-top:16px;font-size:0.8rem;opacity:0.7;">© <span id="year"></span> Linh Quán Việt. All rights reserved.</p>
 </footer>
 
@@ -506,6 +543,15 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
    Until then, orders run in DEMO mode and are NOT emailed.
 ═══════════════════════════════════════════════ */
 const WEB3FORMS_KEY = 'a7e4654d-b60c-4cd0-9db4-5a61416fa3fb';
+
+/* ═══════════════════════════════════════════════
+   GOOGLE CALENDAR AUTO-ADD (zero-click, free)
+   Deploy the Google Apps Script (see google-calendar-apps-script.gs
+   and the README), then paste its Web App URL below. Each order will
+   be added to linhquanviet@gmail.com's calendar automatically.
+   Leave the placeholder to disable this feature.
+═══════════════════════════════════════════════ */
+const CALENDAR_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyVwcWB7G6WY49-S60TelYtVezzWMnHa0A2y8aga0VqTqRWrLxbRALdyT1V8dR261qv/exec';
 
 /* ═══════════ MENU DATA (bilingual) ═══════════ */
 // Each item uses images/item<N>.<ext> — the N matches the item's position in the menu (1–20).
@@ -684,30 +730,8 @@ document.querySelectorAll('input[name="fulfillment"]').forEach(function(r) {
   });
 });
 
-/* ═══════════ PICKUP DAY / TIME OPTIONS ═══════════ */
-(function buildPickupOptions() {
-  const openDays = [1, 5, 6]; // Mon, Fri, Sat
-  const dayNamesVi = ['Chủ Nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
-  const daySel = document.getElementById('pickupDay');
-  const ph = document.createElement('option');
-  ph.value = ''; ph.textContent = '— Chọn ngày / Choose day —';
-  daySel.appendChild(ph);
-  const today = new Date();
-  let added = 0;
-  for (let i = 0; i < 21 && added < 6; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
-    if (openDays.indexOf(d.getDay()) === -1) continue;
-    const label = dayNamesVi[d.getDay()] + ' / ' +
-      d.toLocaleDateString('en-CA', { weekday: 'short' }) + ', ' +
-      d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }) +
-      (i === 0 ? ' (hôm nay / today)' : '');
-    const opt = document.createElement('option');
-    opt.value = d.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-    opt.textContent = label;
-    daySel.appendChild(opt);
-    added++;
-  }
+/* ═══════════ PICKUP TIME OPTIONS ═══════════ */
+(function buildTimeOptions() {
   const timeSel = document.getElementById('pickupTime');
   const tph = document.createElement('option');
   tph.value = ''; tph.textContent = '— Chọn giờ / Choose time —';
@@ -723,6 +747,92 @@ document.querySelectorAll('input[name="fulfillment"]').forEach(function(r) {
     });
   }
 })();
+
+/* ═══════════ PICKUP DAY CALENDAR — only Fri / Sat / Mon selectable ═══════════ */
+const OPEN_DAYS = [1, 5, 6]; // Mon, Fri, Sat
+let calYear, calMonth, selectedPickupDate = null;
+
+function renderCal() {
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calMonthLabel').textContent = monthNames[calMonth] + ' ' + calYear;
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const firstDow = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  let html = '';
+  for (let i = 0; i < firstDow; i++) html += '<button type="button" class="cal-day cal-day-empty" disabled></button>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(calYear, calMonth, d);
+    const isOpen = OPEN_DAYS.indexOf(date.getDay()) !== -1;
+    const isPast = date < today;
+    const isToday = date.getTime() === today.getTime();
+    const isSelected = selectedPickupDate && date.toDateString() === selectedPickupDate.toDateString();
+    let cls = 'cal-day';
+    if (!isOpen || isPast) cls += ' cal-day-off';
+    if (isToday) cls += ' today';
+    if (isSelected) cls += ' selected';
+    const enabled = isOpen && !isPast;
+    html += '<button type="button" class="' + cls + '"' + (enabled ? ' data-day="' + d + '"' : ' disabled') + '>' + d + '</button>';
+  }
+  const days = document.getElementById('calDays');
+  days.innerHTML = html;
+  days.querySelectorAll('[data-day]').forEach(function(btn) {
+    btn.addEventListener('click', function() { selectDay(parseInt(btn.dataset.day, 10)); });
+  });
+  const now = new Date();
+  document.getElementById('calPrev').disabled = (calYear === now.getFullYear() && calMonth === now.getMonth());
+}
+
+function selectDay(d) {
+  selectedPickupDate = new Date(calYear, calMonth, d);
+  const label = selectedPickupDate.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+  document.getElementById('pickupDay').value = label;
+  const en = document.body.classList.contains('en');
+  document.getElementById('calSelected').textContent = (en ? '✓ Pickup: ' : '✓ Ngày lấy: ') + label;
+  renderCal();
+}
+
+(function initCal() {
+  const now = new Date();
+  calYear = now.getFullYear(); calMonth = now.getMonth();
+  document.getElementById('calPrev').addEventListener('click', function() {
+    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal();
+  });
+  document.getElementById('calNext').addEventListener('click', function() {
+    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal();
+  });
+  renderCal();
+})();
+
+/* Parse a "2:00 PM" style time into 24h {h, m} */
+function parsePickupTime(timeStr) {
+  const parts = timeStr.split(' ');           // e.g. "2:00", "PM"
+  const hm = parts[0].split(':');
+  let h = parseInt(hm[0], 10);
+  const m = parseInt(hm[1], 10);
+  if (parts[1] === 'PM' && h !== 12) h += 12;
+  if (parts[1] === 'AM' && h === 12) h = 0;
+  return { h: h, m: m };
+}
+
+/* Build a Google Calendar "add event" link for the pickup/delivery time */
+function buildGCalLink(name, timeStr, isDelivery, address, itemsText, subtotal, phone) {
+  if (!selectedPickupDate) return '';
+  const t = parsePickupTime(timeStr);
+  const start = new Date(selectedPickupDate.getFullYear(), selectedPickupDate.getMonth(), selectedPickupDate.getDate(), t.h, t.m);
+  const end = new Date(start.getTime() + 30 * 60000);
+  const pad = function(n) { return String(n).padStart(2, '0'); };
+  const fmt = function(dt) { return dt.getFullYear() + pad(dt.getMonth() + 1) + pad(dt.getDate()) + 'T' + pad(dt.getHours()) + pad(dt.getMinutes()) + '00'; };
+  const title = 'Đơn/Order: ' + name + (isDelivery ? ' (Giao/Delivery)' : ' (Pickup)');
+  const details = itemsText + '\nTổng/Total: $' + subtotal + '\nĐT/Phone: ' + phone + (isDelivery ? '\nĐịa chỉ/Address: ' + address : '');
+  const location = isDelivery ? address : '1012 Tillicum Road, Victoria, BC';
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent(title)
+    + '&dates=' + fmt(start) + '/' + fmt(end)
+    + '&details=' + encodeURIComponent(details)
+    + '&location=' + encodeURIComponent(location);
+}
 
 /* ═══════════ SUBMIT ═══════════ */
 document.getElementById('orderForm').addEventListener('submit', async function(e) {
@@ -745,18 +855,70 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     alert('Vui lòng nhập địa chỉ giao hàng.\nPlease enter a delivery address.');
     return;
   }
+  const email = form.email.value.trim();
+  if (!email) {
+    alert('Vui lòng nhập email để nhận xác nhận đơn hàng.\nPlease enter your email so we can send you a confirmation.');
+    return;
+  }
+  if (!selectedPickupDate || !form.pickupDay.value) {
+    alert('Vui lòng chọn ngày lấy trên lịch.\nPlease pick a pickup day from the calendar.');
+    return;
+  }
 
   let lines = [];
   ids.forEach(function(id) {
     const it = cart[id];
     lines.push('  • ' + it.qty + ' x ' + it.name + ' (' + it.cat + ') = $' + (it.price * it.qty));
   });
-  const summary =
-    'MON DAT / ITEMS:\n' + lines.join('\n') +
-    '\n\nTam tinh / Subtotal: $' + subtotal +
-    (isDelivery ? '\nGiao hang / Delivery: $5-$10 (confirm by distance)' : '') +
-    '\nTONG MON / FOOD TOTAL: $' + subtotal;
-  document.getElementById('orderSummaryField').value = summary;
+  const itemsText = lines.join('\n');
+
+  // Google Calendar "add event" link for the pickup/delivery time (manual one-click, on the success screen + in the email)
+  const gcalUrl = buildGCalLink(form.name.value, form.pickupTime.value, isDelivery, address, itemsText, subtotal, form.phone.value);
+  document.getElementById('gcalLink').href = gcalUrl || '#';
+
+  // ZERO-CLICK: auto-add the order to linhquanviet@gmail.com's Google Calendar via the Apps Script web app.
+  // Fire-and-forget (no-cors) — silently does nothing if the URL isn't set up yet.
+  if (CALENDAR_WEBHOOK_URL !== 'PASTE-YOUR-APPS-SCRIPT-URL-HERE') {
+    const t = parsePickupTime(form.pickupTime.value);
+    const calParams = new URLSearchParams({
+      name:    form.name.value,
+      phone:   form.phone.value,
+      email:   email,
+      type:    isDelivery ? 'Delivery' : 'Pickup',
+      address: isDelivery ? address : '',
+      notes:   form.notes.value || '',
+      order:   itemsText + '\nTong/Total: $' + subtotal,
+      day:     form.pickupDay.value,
+      time:    form.pickupTime.value,
+      y:  selectedPickupDate.getFullYear(),
+      mo: selectedPickupDate.getMonth() + 1,
+      d:  selectedPickupDate.getDate(),
+      h:  t.h,
+      mi: t.m
+    });
+    fetch(CALENDAR_WEBHOOK_URL + '?' + calParams.toString(), { mode: 'no-cors' }).catch(function() {});
+  }
+
+  // Friendly bilingual confirmation — goes to the kitchen (linhquanviet@gmail.com)
+  // AND, via cc, to the customer's email as their confirmation.
+  const message =
+    'Cảm ơn bạn đã đặt món tại Linh Quán Việt – Bếp Cô Lan! ❤️\n' +
+    'Thank you for ordering from Linh Quán Việt – Bếp Cô Lan!\n\n' +
+    '⏰ LẤY / PICKUP: ' + form.pickupDay.value + ' — ' + form.pickupTime.value + '\n\n' +
+    '===== ĐƠN HÀNG / ORDER =====\n' +
+    itemsText + '\n' +
+    'Tổng món / Food total: $' + subtotal + '\n' +
+    (isDelivery ? 'Giao hàng / Delivery fee: $5–$10 (bếp báo lại theo khoảng cách / we will confirm by distance)\n' : '') +
+    '\n===== THÔNG TIN / DETAILS =====\n' +
+    'Tên / Name: ' + form.name.value + '\n' +
+    'Điện thoại / Phone: ' + form.phone.value + '\n' +
+    'Email: ' + email + '\n' +
+    'Hình thức / Type: ' + (isDelivery ? 'Giao hàng / Delivery' : 'Tự đến lấy / Pickup') + '\n' +
+    (isDelivery ? 'Địa chỉ / Address: ' + address + '\n' : '') +
+    'Ghi chú / Notes: ' + (form.notes.value || '(none)') + '\n\n' +
+    '📅 Thêm vào Google Calendar / Add to your calendar:\n' + gcalUrl + '\n\n' +
+    'Bếp sẽ liên hệ để xác nhận. / We will contact you to confirm.\n' +
+    '📞 250-891-3749  ·  📍 1012 Tillicum Road, Victoria, BC';
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -764,17 +926,11 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
 
   const payload = {
     access_key: WEB3FORMS_KEY,
-    subject: '🍜 Đơn hàng mới / New order – ' + form.name.value + ' (' + (isDelivery ? 'DELIVERY' : 'PICKUP') + ')',
-    from_name: 'Website Linh Quán Việt',
-    'Ten khach / Name': form.name.value,
-    'Dien thoai / Phone': form.phone.value,
-    'Email': form.email.value || '(none)',
-    'Ngay lay / Pickup day': form.pickupDay.value,
-    'Gio lay / Pickup time': form.pickupTime.value,
-    'Hinh thuc / Type': form.fulfillment.value,
-    'Dia chi / Address': isDelivery ? address : '(pickup)',
-    'Ghi chu / Notes': form.notes.value || '(none)',
-    'CHI TIET DON / ORDER': summary,
+    subject: '🍜 Đơn / Order – ' + form.name.value + ' – ' + form.pickupDay.value + ' ' + form.pickupTime.value + ' (' + (isDelivery ? 'DELIVERY' : 'PICKUP') + ')',
+    from_name: 'Linh Quán Việt – Bếp Cô Lan',
+    email: email,   // Reply-To = customer
+    cc: email,      // send a confirmation copy to the customer's email
+    message: message,
     botcheck: ''
   };
 
@@ -803,13 +959,14 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
 function showSuccess(form, isDelivery, demo) {
   document.getElementById('orderForm').style.display = 'none';
   const en = document.body.classList.contains('en');
+  const email = form.email.value.trim();
   const msg = en
     ? ('Your order has been sent to the kitchen' + (demo ? ' (demo mode — Web3Forms key not set yet)' : '') +
-       '. We\'ll call/text <strong>' + form.phone.value + '</strong> to confirm' +
-       (isDelivery ? ' and let you know the delivery fee.' : '.'))
+       '. A confirmation email has been sent to <strong>' + email + '</strong> — please check your inbox (and Spam folder).' +
+       (isDelivery ? ' We\'ll be in touch about the delivery fee.' : ''))
     : ('Đơn hàng của bạn đã được gửi tới bếp' + (demo ? ' (chế độ demo — chưa cài Web3Forms key)' : '') +
-       '. Chúng tôi sẽ gọi/nhắn tin tới <strong>' + form.phone.value + '</strong> để xác nhận' +
-       (isDelivery ? ' và báo phí giao hàng.' : '.'));
+       '. Email xác nhận đã được gửi tới <strong>' + email + '</strong> — vui lòng kiểm tra hộp thư (và mục Spam).' +
+       (isDelivery ? ' Bếp sẽ báo lại phí giao hàng.' : ''));
   document.getElementById('successMsg').innerHTML = msg;
   document.getElementById('orderSuccess').classList.add('show');
   document.getElementById('orderSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
