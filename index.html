@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Linh Quán Việt – Bếp Cô Lan. Traditional homemade Vietnamese food in Victoria, BC. Bánh mì, xôi, bún, mì gói trộn. Order online for pickup or delivery. 1012 Tillicum Road.">
+<meta name="keywords" content="Vietnamese food Victoria BC, banh mi Victoria, homemade Vietnamese food, Linh Quan Viet, Bep Co Lan, Tillicum Road, xoi, bun">
+<meta property="og:title" content="Linh Quán Việt – Bếp Cô Lan | Homemade Vietnamese Food">
+<meta property="og:description" content="Traditional homemade Vietnamese food in Victoria, BC. Order online for pickup or delivery.">
+<meta property="og:type" content="website">
+<title>Linh Quán Việt – Bếp Cô Lan | Homemade Vietnamese Food, Victoria BC</title>
+<link rel="icon" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ RESET & BRAND VARIABLES (from menu palette) ═══════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --green:      #1c4d2e;
+    --green-dark: #123a22;
+    --green-deep: #0f2e1b;
+    --gold:       #e0a927;
+    --gold-dark:  #c28f1e;
+    --red:        #c8362c;
+    --red-dark:   #a52a22;
+    --charcoal:   #1f1e1b;
+    --cream:      #fbf7ef;
+    --cream-2:    #f1e8d6;
+    --text:       #26221c;
+    --text-mid:   #5f584c;
+    --text-light: #9a9082;
+    --white:      #ffffff;
+    --shadow:     0 10px 34px rgba(18,58,34,0.16);
+    --shadow-sm:  0 3px 12px rgba(18,58,34,0.10);
+    --radius-xl:  22px;
+    --radius-lg:  16px;
+    --radius-md:  12px;
+    --radius-pill:999px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; color: var(--text); background: var(--cream); line-height: 1.6; }
+h1,h2,h3,h4 { font-weight: 800; }
+.script { font-family: 'Pacifico', cursive; font-weight: 400; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ═══════════ LANGUAGE TOGGLE VISIBILITY ═══════════ */
+[data-lang="en"] { display: none; }
+body.en [data-lang="vi"] { display: none; }
+body.en [data-lang="en"] { display: revert; }
+
+/* ═══════════ NAVBAR ═══════════ */
+nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(251,247,239,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 2px 16px rgba(18,58,34,0.08);
+}
+.nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo img { height: 54px; width: 54px; object-fit: cover; border-radius: 50%; border: 2px solid var(--gold); }
+.nav-logo-text strong { display: block; font-size: 1.28rem; color: var(--green); line-height: 1.1; }
+.nav-logo-text span { font-size: 0.64rem; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase; }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.84rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; padding: 8px 13px; border-radius: var(--radius-pill); transition: all 0.2s; }
+.nav-links a:hover { color: var(--green); background: var(--cream-2); }
+.nav-order-btn { background: var(--red) !important; color: var(--white) !important; padding: 10px 20px !important; }
+.nav-order-btn:hover { background: var(--red-dark) !important; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.lang-btn { background: var(--green); color: var(--white); border: none; font-weight: 800; font-size: 0.8rem; padding: 9px 15px; border-radius: var(--radius-pill); cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; white-space: nowrap; }
+.lang-btn:hover { background: var(--green-dark); }
+.lang-btn::before { content: "🌐 "; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+.hamburger span { display: block; width: 26px; height: 2.5px; background: var(--green); border-radius: 4px; transition: all 0.3s; }
+
+/* ═══════════ HERO ═══════════ */
+.hero { position: relative; overflow: hidden; background: linear-gradient(140deg, var(--green-deep) 0%, var(--green) 55%, var(--green-dark) 100%); color: var(--white); }
+.hero::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 15%, rgba(224,169,39,0.22), transparent 45%); pointer-events:none; }
+.hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 68px 24px 78px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero-badge { display: inline-block; background: rgba(224,169,39,0.18); border: 1px solid rgba(224,169,39,0.55); color: #ffe6a8; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: 18px; font-weight: 800; }
+.hero h1 { font-size: 3.5rem; line-height: 1.03; margin-bottom: 4px; }
+.hero .script-sub { font-family: 'Pacifico', cursive; font-size: 2rem; color: var(--gold); margin-bottom: 16px; }
+.hero p.lead { font-size: 1.1rem; max-width: 470px; margin-bottom: 8px; opacity: 0.96; }
+.hero .hours-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.22); border:1px solid rgba(224,169,39,0.4); padding: 10px 18px; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.92rem; margin: 20px 0 26px; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800; font-size: 1rem; padding: 14px 28px; border-radius: var(--radius-pill); border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: var(--gold); color: var(--charcoal); }
+.btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.6); }
+.btn-outline:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+.hero-img-wrap { position: relative; }
+.hero-img-wrap img.food { border-radius: var(--radius-xl); box-shadow: 0 22px 54px rgba(0,0,0,0.4); border: 4px solid rgba(224,169,39,0.6); width: 100%; height: 440px; object-fit: cover; }
+.hero-logo-float { position: absolute; bottom: -24px; left: -22px; width: 112px; height: 112px; border-radius: 50%; border: 4px solid var(--white); box-shadow: var(--shadow); background: var(--white); object-fit: cover; }
+
+/* ═══════════ SECTIONS ═══════════ */
+section { scroll-margin-top: 86px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.section-pad { padding: 74px 0; }
+.section-head { text-align: center; max-width: 660px; margin: 0 auto 46px; }
+.section-tag { display: inline-block; font-size: 0.74rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); background: #fbe4e1; padding: 5px 16px; border-radius: var(--radius-pill); margin-bottom: 14px; font-weight: 800; }
+.section-head h2 { font-size: 2.4rem; color: var(--green); margin-bottom: 10px; }
+.section-head p { color: var(--text-mid); font-size: 1.05rem; }
+
+/* ═══════════ INFO STRIP ═══════════ */
+.info-strip { background: var(--green); color: var(--cream); }
+.info-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.info-cell { padding: 26px 22px; text-align: center; border-right: 1px solid rgba(255,255,255,0.12); }
+.info-cell:last-child { border-right: none; }
+.info-cell .ic { font-size: 1.7rem; margin-bottom: 8px; }
+.info-cell strong { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 4px; }
+.info-cell span { font-weight: 700; color: var(--white); font-size: 0.98rem; }
+.info-cell a { color: var(--white); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.5); }
+
+/* ═══════════ MENU ═══════════ */
+#menu { background: var(--cream); }
+.menu-cat { margin-bottom: 40px; }
+.menu-cat-bar { display: flex; align-items: center; gap: 14px; background: var(--charcoal); color: var(--white); border-radius: var(--radius-lg); padding: 16px 22px; margin-bottom: 22px; }
+.menu-cat-bar .emoji { font-size: 1.7rem; }
+.menu-cat-bar .cat-names { line-height: 1.2; }
+.menu-cat-bar .cat-vi { font-size: 1.4rem; font-weight: 900; }
+.menu-cat-bar .cat-en { font-size: 0.82rem; color: #cfc8bb; font-weight: 700; }
+.menu-cat-bar .price-badge { margin-left: auto; background: var(--red); color: var(--white); font-weight: 900; text-align: center; padding: 8px 18px; border-radius: var(--radius-md); white-space: nowrap; line-height: 1.1; }
+.menu-cat-bar .price-badge b { font-size: 1.35rem; display: block; }
+.menu-cat-bar .price-badge small { font-size: 0.68rem; opacity: 0.9; }
+.dish-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.dish { background: var(--white); border: 1.5px solid var(--cream-2); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all 0.2s; }
+.dish:hover { border-color: var(--gold); box-shadow: var(--shadow-sm); transform: translateY(-3px); }
+.dish-photo { position: relative; height: 150px; background-size: cover; background-position: center; background-color: var(--green); }
+.dish-photo.ph { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); }
+.dish-photo.ph .ph-emoji { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
+.dish-photo.ph::after { content: "Bếp Cô Lan"; position: absolute; bottom: 8px; right: 10px; font-family:'Pacifico',cursive; font-size: 0.8rem; color: var(--gold); opacity: 0.85; }
+.dish-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--charcoal); font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: var(--radius-pill); }
+.dish-body { padding: 14px 15px 16px; display: flex; flex-direction: column; flex: 1; }
+.dish-name { font-size: 1rem; color: var(--text); line-height: 1.25; margin-bottom: 3px; }
+.dish-en { font-size: 0.8rem; color: var(--text-light); font-weight: 600; margin-bottom: 12px; flex: 1; }
+.dish-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.dish-price { font-size: 1.1rem; font-weight: 900; color: var(--red); }
+.add-btn { background: var(--green); color: var(--white); border: none; padding: 8px 14px; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 800; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.add-btn:hover { background: var(--green-dark); transform: scale(1.05); }
+.add-btn::before { content: "+ "; font-size: 1rem; }
+.custom-note { background: #f4f9f4; border: 1.5px dashed var(--green); border-radius: var(--radius-lg); padding: 22px 26px; margin-top: 34px; }
+.custom-note h4 { color: var(--green); margin-bottom: 6px; font-size: 1.15rem; }
+.custom-note p { color: var(--text-mid); font-size: 0.95rem; }
+.custom-note .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.custom-note .tags span { background: var(--white); border: 1px solid var(--green); border-radius: var(--radius-pill); padding: 5px 15px; font-size: 0.85rem; font-weight: 700; color: var(--green); }
+
+/* ═══════════ ORDER ═══════════ */
+#order { background: var(--white); }
+.order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.order-card { background: var(--cream); border: 2px solid var(--cream-2); border-radius: var(--radius-xl); padding: 30px; }
+.order-card h3 { color: var(--green); font-size: 1.35rem; margin-bottom: 4px; }
+.order-card .sub { color: var(--text-light); font-size: 0.9rem; margin-bottom: 22px; }
+#cartItems { list-style: none; margin-bottom: 18px; min-height: 60px; }
+#cartItems .empty { color: var(--text-light); font-style: italic; padding: 20px 0; text-align: center; }
+.cart-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--cream-2); }
+.cart-row .cr-name { flex: 1; font-weight: 700; font-size: 0.92rem; }
+.cart-row .cr-name small { display: block; color: var(--text-light); font-weight: 600; }
+.qty-ctrl { display: flex; align-items: center; gap: 8px; }
+.qty-ctrl button { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--green); background: var(--white); color: var(--green); font-size: 1.1rem; cursor: pointer; font-weight: 800; display:flex; align-items:center; justify-content:center; }
+.qty-ctrl button:hover { background: var(--green); color: var(--white); }
+.qty-ctrl .qv { min-width: 22px; text-align: center; font-weight: 800; }
+.cart-row .cr-price { min-width: 58px; text-align: right; font-weight: 800; color: var(--green); }
+.cart-totals { border-top: 2px solid var(--gold); padding-top: 16px; }
+.cart-totals .tline { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
+.cart-totals .tline.grand { font-size: 1.3rem; font-weight: 900; color: var(--red); }
+.cart-totals .note { font-size: 0.82rem; color: var(--text-mid); background: #f4f9f4; border-radius: var(--radius-md); padding: 8px 12px; margin-top: 8px; }
+.form-row { margin-bottom: 15px; }
+.form-row label { display: block; font-size: 0.78rem; font-weight: 800; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.form-row input, .form-row select, .form-row textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--cream-2); border-radius: var(--radius-md); font-family: inherit; font-size: 0.95rem; background: var(--white); color: var(--text); transition: border-color 0.2s; }
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--green); }
+.form-row textarea { resize: vertical; min-height: 70px; }
+.form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.radio-group { display: flex; gap: 12px; }
+.radio-opt { flex: 1; position: relative; }
+.radio-opt input { position: absolute; opacity: 0; }
+.radio-opt label { display: block; text-align: center; padding: 14px; border: 2px solid var(--cream-2); border-radius: var(--radius-md); cursor: pointer; font-weight: 800; text-transform: none; letter-spacing: 0; color: var(--text-mid); transition: all 0.2s; margin: 0; }
+.radio-opt input:checked + label { border-color: var(--green); background: #eef6ef; color: var(--green); }
+#deliveryFields { display: none; }
+#deliveryFields.show { display: block; }
+.delivery-warn { display: none; background: #fff3cd; border: 1.5px solid var(--gold); border-radius: var(--radius-md); padding: 10px 14px; font-size: 0.85rem; color: var(--charcoal); margin-top: 4px; }
+.delivery-warn.show { display: block; }
+.btn-submit { width: 100%; background: var(--red); color: var(--white); border: none; padding: 16px; border-radius: var(--radius-pill); font-size: 1.05rem; font-weight: 900; cursor: pointer; margin-top: 8px; transition: all 0.2s; }
+.btn-submit:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+.order-success { display: none; text-align: center; padding: 30px; }
+.order-success.show { display: block; }
+.order-success .check { font-size: 3.5rem; }
+.order-success h3 { color: var(--green); margin: 10px 0; }
+
+/* ═══════════ GALLERY ═══════════ */
+#gallery { background: var(--cream); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.gallery-grid img, .gallery-grid video { width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 0.3s; background: #000; display: block; }
+.gallery-grid img:hover { transform: translateY(-4px) scale(1.02); }
+.gallery-grid .tall { grid-row: span 2; height: 100%; }
+
+/* ═══════════ CONTACT ═══════════ */
+#contact { background: var(--green-deep); color: var(--cream); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.contact-grid h2 { color: var(--white); font-size: 2.2rem; margin-bottom: 14px; }
+.contact-ways { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.contact-way { display: flex; align-items: center; gap: 14px; }
+.contact-way .cw-ic { font-size: 1.5rem; width: 48px; height: 48px; background: rgba(224,169,39,0.18); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-way strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); }
+.contact-way a, .contact-way span { color: var(--white); font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+.map-embed { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow); border: 3px solid var(--gold); }
+.map-embed iframe { width: 100%; height: 340px; border: 0; display: block; }
+
+/* ═══════════ FOOTER ═══════════ */
+footer { background: var(--charcoal); color: #b8b0a2; text-align: center; padding: 40px 24px; }
+footer .script { color: var(--gold); font-size: 1.8rem; }
+footer p { font-size: 0.9rem; margin-top: 8px; }
+footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); font-weight: 700; text-decoration: none; }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 980px) { .dish-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 860px) {
+    .hero-inner, .order-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-img-wrap { order: -1; }
+    .hero h1 { font-size: 2.6rem; }
+    .info-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-cell:nth-child(2) { border-right: none; }
+    .dish-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid .tall { grid-row: span 1; height: 250px; }
+    .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; background: var(--cream); padding: 14px; gap: 4px; box-shadow: var(--shadow); border-bottom: 3px solid var(--gold); }
+    .nav-links.open { display: flex; }
+    .nav-links a { width: 100%; text-align: center; padding: 12px; }
+    .hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+    .form-2col { grid-template-columns: 1fr; }
+    .dish-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .menu-cat-bar .cat-vi { font-size: 1.15rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <img src="images/logo.jpg" alt="Linh Quán Việt – Bếp Cô Lan logo">
+      <div class="nav-logo-text">
+        <strong>Linh Quán Việt</strong>
+        <span>Bếp Cô Lan · Homemade Vietnamese</span>
+      </div>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#menu"><span data-lang="vi">Thực đơn</span><span data-lang="en">Menu</span></a></li>
+        <li><a href="#gallery"><span data-lang="vi">Hình ảnh</span><span data-lang="en">Gallery</span></a></li>
+        <li><a href="#contact"><span data-lang="vi">Liên hệ</span><span data-lang="en">Contact</span></a></li>
+        <li><a href="#order" class="nav-order-btn"><span data-lang="vi">Đặt món</span><span data-lang="en">Order</span></a></li>
+      </ul>
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">English</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-badge">🇻🇳 Victoria, BC · <span data-lang="vi">Món Việt làm tại nhà</span><span data-lang="en">Homemade Vietnamese food</span></span>
+      <h1>Linh Quán Việt</h1>
+      <div class="script-sub">Bếp Cô Lan</div>
+      <p class="lead" data-lang="vi">Bánh mì, xôi, bún và mì gói trộn — tất cả đều nấu tươi mỗi ngày mở bán, theo đúng khẩu vị của bạn. ❤️</p>
+      <p class="lead" data-lang="en">Bánh mì, sticky rice, vermicelli & mixed noodles — all cooked fresh every open day, made just the way you like it. ❤️</p>
+      <p class="lead" style="font-size:0.98rem;opacity:0.9;" data-lang="vi">Traditional Vietnamese food, homemade with love.</p>
+      <p class="lead" style="font-size:0.98rem;opacity:0.9;" data-lang="en">Món Việt truyền thống, làm tại nhà bằng cả tấm lòng.</p>
+      <div class="hours-pill">⏰ <span data-lang="vi">Thứ 6 · Thứ 7 · Thứ 2</span><span data-lang="en">Fri · Sat · Mon</span> &nbsp;|&nbsp; 9:00 AM – 7:00 PM</div>
+      <div class="hero-cta">
+        <a href="#order" class="btn btn-primary">🛒 <span data-lang="vi">Đặt món ngay</span><span data-lang="en">Order Now</span></a>
+        <a href="tel:2508913749" class="btn btn-outline">📞 250-891-3749</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="images/spread1.jpg" class="food" alt="Homemade Vietnamese dishes from Bếp Cô Lan">
+      <img src="images/logo.jpg" class="hero-logo-float" alt="Logo">
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ INFO STRIP ═══════════ -->
+<div class="info-strip">
+  <div class="wrap">
+    <div class="info-grid">
+      <div class="info-cell">
+        <div class="ic">📍</div>
+        <strong><span data-lang="vi">Địa chỉ · Pickup</span><span data-lang="en">Address · Pickup</span></strong>
+        <span>1012 Tillicum Road<br>Victoria, BC</span>
+      </div>
+      <div class="info-cell">
+        <div class="ic">🕘</div>
+        <strong><span data-lang="vi">Giờ mở bán</span><span data-lang="en">Open hours</span></strong>
+        <span><span data-lang="vi">Thứ 6 · Thứ 7 · Thứ 2</span><span data-lang="en">Fri · Sat · Mon</span><br>9AM – 7PM</span>
+      </div>
+      <div class="info-cell">
+        <div class="ic">📞</div>
+        <strong><span data-lang="vi">Gọi / Nhắn tin</span><span data-lang="en">Call / Text</span></strong>
+        <span><a href="tel:2508913749">250-891-3749</a></span>
+      </div>
+      <div class="info-cell">
+        <div class="ic">✉️</div>
+        <strong>Email</strong>
+        <span><a href="mailto:linhquanviet@gmail.com">linhquanviet@gmail.com</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MENU ═══════════ -->
+<section id="menu" class="section-pad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag"><span data-lang="vi">Thực đơn</span><span data-lang="en">Our Menu</span></span>
+      <h2><span data-lang="vi">Món ngon nhà làm</span><span data-lang="en">Homemade favourites</span></h2>
+      <p><span data-lang="vi">Nhấn <strong>+ Thêm</strong> để thêm món vào đơn hàng bên dưới.</span><span data-lang="en">Tap <strong>+ Add</strong> to add a dish to your order below.</span></p>
+    </div>
+    <div id="menuRoot"><!-- categories injected by JS --></div>
+
+    <div class="custom-note">
+      <h4>❤️ <span data-lang="vi">Đặt món theo yêu cầu — không tính thêm phí</span><span data-lang="en">Made to your taste — no extra charge</span></h4>
+      <p><span data-lang="vi">Bếp Cô Lan luôn làm theo khẩu vị của bạn. Ghi chú "nhiều / ít" trong ô ghi chú khi đặt hàng:</span><span data-lang="en">We always cook to your taste. Note "more / less" in the notes box when ordering:</span></p>
+      <div class="tags" id="customTags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ORDER ═══════════ -->
+<section id="order" class="section-pad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag"><span data-lang="vi">Đặt món</span><span data-lang="en">Order Online</span></span>
+      <h2><span data-lang="vi">Đặt hàng &amp; giao tận nơi</span><span data-lang="en">Order &amp; delivery</span></h2>
+      <p><span data-lang="vi">Chọn món ở trên, điền thông tin, đơn hàng sẽ được gửi tới bếp. Chúng tôi sẽ gọi/nhắn tin xác nhận.</span><span data-lang="en">Add items above, fill in your details, and your order is sent to the kitchen. We'll call/text to confirm.</span></p>
+    </div>
+
+    <div class="order-grid">
+      <!-- CART -->
+      <div class="order-card">
+        <h3>🛒 <span data-lang="vi">Đơn hàng của bạn</span><span data-lang="en">Your order</span></h3>
+        <p class="sub"><span data-lang="vi">Tóm tắt đơn hàng</span><span data-lang="en">Order summary</span></p>
+        <ul id="cartItems">
+          <li class="empty"><span data-lang="vi">Chưa có món nào — nhấn "+ Thêm" ở thực đơn.</span><span data-lang="en">No items yet — tap "+ Add" on the menu above.</span></li>
+        </ul>
+        <div class="cart-totals">
+          <div class="tline"><span data-lang="vi">Tạm tính</span><span data-lang="en">Subtotal</span><span id="subtotal">$0</span></div>
+          <div class="tline"><span data-lang="vi">Phí giao hàng</span><span data-lang="en">Delivery fee</span><span id="deliveryLine">—</span></div>
+          <div class="tline grand"><span data-lang="vi">Tổng món</span><span data-lang="en">Food total</span><span id="grandTotal">$0</span></div>
+          <div class="note" id="deliveryNote" style="display:none;">🚗 <span data-lang="vi">Giao hàng cho đơn từ <strong>$50</strong> trở lên. Phí giao <strong>$5–$10</strong> tùy khoảng cách, bếp sẽ báo lại khi xác nhận đơn.</span><span data-lang="en">Delivery for orders <strong>$50+</strong>. Delivery fee <strong>$5–$10</strong> by distance — we'll confirm it when we call.</span></div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="order-card">
+        <form id="orderForm">
+          <h3>📝 <span data-lang="vi">Thông tin đặt hàng</span><span data-lang="en">Your details</span></h3>
+          <p class="sub"><span data-lang="vi">Điền thông tin của bạn</span><span data-lang="en">Fill in your info</span></p>
+
+          <div class="form-row">
+            <label><span data-lang="vi">Họ tên</span><span data-lang="en">Full name</span> *</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-2col">
+            <div class="form-row">
+              <label><span data-lang="vi">Điện thoại</span><span data-lang="en">Phone</span> *</label>
+              <input type="tel" name="phone" required>
+            </div>
+            <div class="form-row">
+              <label>Email</label>
+              <input type="email" name="email">
+            </div>
+          </div>
+
+          <div class="form-2col">
+            <div class="form-row">
+              <label><span data-lang="vi">Ngày lấy</span><span data-lang="en">Pickup day</span> *</label>
+              <select name="pickupDay" id="pickupDay" required></select>
+            </div>
+            <div class="form-row">
+              <label><span data-lang="vi">Giờ lấy</span><span data-lang="en">Pickup time</span> *</label>
+              <select name="pickupTime" id="pickupTime" required></select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label><span data-lang="vi">Hình thức</span><span data-lang="en">Pickup or delivery</span> *</label>
+            <div class="radio-group">
+              <div class="radio-opt">
+                <input type="radio" name="fulfillment" id="ff-pickup" value="Pickup" checked>
+                <label for="ff-pickup">🏠 <span data-lang="vi">Tự đến lấy</span><span data-lang="en">Pickup</span></label>
+              </div>
+              <div class="radio-opt">
+                <input type="radio" name="fulfillment" id="ff-delivery" value="Delivery">
+                <label for="ff-delivery">🚗 <span data-lang="vi">Giao hàng</span><span data-lang="en">Delivery</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div id="deliveryFields">
+            <div class="form-row">
+              <label><span data-lang="vi">Địa chỉ giao hàng</span><span data-lang="en">Delivery address</span></label>
+              <textarea name="address" placeholder="Số nhà, đường, thành phố, mã bưu điện / Full address"></textarea>
+            </div>
+            <div class="delivery-warn" id="deliveryWarn">⚠️ <span data-lang="vi">Giao hàng áp dụng cho đơn từ <strong>$50</strong> trở lên. Vui lòng thêm món.</span><span data-lang="en">Delivery is for orders <strong>$50+</strong>. Please add more items.</span></div>
+          </div>
+
+          <div class="form-row">
+            <label><span data-lang="vi">Ghi chú (nhiều/ít hành, ớt, pate…)</span><span data-lang="en">Notes (more/less onion, chili, pâté…)</span></label>
+            <textarea name="notes" placeholder="Ví dụ / e.g.: bánh mì nhiều ớt, ít hành ngò"></textarea>
+          </div>
+
+          <input type="hidden" name="orderSummary" id="orderSummaryField">
+          <button type="submit" class="btn-submit" id="submitBtn"><span data-lang="vi">Gửi đơn hàng</span><span data-lang="en">Send Order</span></button>
+        </form>
+
+        <div class="order-success" id="orderSuccess">
+          <div class="check">✅</div>
+          <h3><span data-lang="vi">Cảm ơn bạn!</span><span data-lang="en">Thank you!</span></h3>
+          <p id="successMsg"></p>
+          <button class="btn-submit" style="margin-top:20px;" onclick="location.reload()"><span data-lang="vi">Đặt đơn khác</span><span data-lang="en">New order</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="gallery" class="section-pad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag"><span data-lang="vi">Hình ảnh</span><span data-lang="en">Gallery</span></span>
+      <h2><span data-lang="vi">Món ăn của chúng tôi</span><span data-lang="en">Our food</span></h2>
+    </div>
+    <div class="gallery-grid">
+      <video class="tall" src="images/video1.mp4" poster="images/spread1.jpg" controls preload="none" playsinline></video>
+      <img src="images/spread2.jpg" alt="Vietnamese dishes spread">
+      <img src="images/meatballs.jpg" alt="Chả · grilled pork meatballs">
+      <img src="images/shredded.jpg" alt="Shredded pork">
+      <img src="images/xiumai-raw.jpg" alt="Xíu mại · pork meatballs prep">
+      <img src="images/pate.jpg" alt="Pâté · homemade">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="section-pad">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2><span data-lang="vi">Liên hệ &amp; đặt hàng</span><span data-lang="en">Contact &amp; ordering</span></h2>
+        <p><span data-lang="vi">Gọi hoặc nhắn tin đều được — bếp luôn sẵn sàng làm món theo khẩu vị của bạn.</span><span data-lang="en">Call or text us anytime — we're always happy to cook to your taste.</span></p>
+        <div class="contact-ways">
+          <div class="contact-way">
+            <div class="cw-ic">📞</div>
+            <div><strong><span data-lang="vi">Điện thoại</span><span data-lang="en">Phone</span></strong><a href="tel:2508913749">250-891-3749</a></div>
+          </div>
+          <div class="contact-way">
+            <div class="cw-ic">✉️</div>
+            <div><strong>Email</strong><a href="mailto:linhquanviet@gmail.com">linhquanviet@gmail.com</a></div>
+          </div>
+          <div class="contact-way">
+            <div class="cw-ic">📍</div>
+            <div><strong><span data-lang="vi">Địa chỉ · Pickup</span><span data-lang="en">Address · Pickup</span></strong><span>1012 Tillicum Road, Victoria, BC</span></div>
+          </div>
+          <div class="contact-way">
+            <div class="cw-ic">🕘</div>
+            <div><strong><span data-lang="vi">Giờ mở bán</span><span data-lang="en">Open hours</span></strong><span><span data-lang="vi">Thứ 6, Thứ 7, Thứ 2</span><span data-lang="en">Fri, Sat, Mon</span> · 9AM – 7PM</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q=1012+Tillicum+Road,+Victoria,+BC&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map – 1012 Tillicum Road"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="script">Bếp Cô Lan</div>
+  <p><strong>Linh Quán Việt</strong> · <span data-lang="vi">Món Việt truyền thống làm tại nhà</span><span data-lang="en">Traditional homemade Vietnamese food</span> 🇻🇳❤️</p>
+  <p>1012 Tillicum Road, Victoria, BC · 250-891-3749 · linhquanviet@gmail.com</p>
+  <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="fb-link">📘 <span data-lang="vi">Theo dõi trên Facebook</span><span data-lang="en">Follow us on Facebook</span></a>
+  <p style="margin-top:16px;font-size:0.8rem;opacity:0.7;">© <span id="year"></span> Linh Quán Việt. All rights reserved.</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════
+   WEB3FORMS ACCESS KEY  (free, no backend)
+   1. Go to  https://web3forms.com
+   2. Enter  linhquanviet@gmail.com  → get your free Access Key.
+   3. Paste it below (replace the placeholder).
+   Until then, orders run in DEMO mode and are NOT emailed.
+═══════════════════════════════════════════════ */
+const WEB3FORMS_KEY = 'PASTE-YOUR-WEB3FORMS-KEY-HERE';
+
+/* ═══════════ MENU DATA (bilingual) ═══════════ */
+// Each item uses images/item<N>.<ext> — the N matches the item's position in the menu (1–20).
+// Replace any item<N> image in the images/ folder to update that dish's photo.
+const MENU = [
+  {
+    cat: 'Mì gói trộn', catEn: 'Dry-mixed instant noodles', emoji: '🍜', price: 19, unit: 'hộp', unitEn: 'box',
+    items: [
+      { vi: 'Lòng gà & đùi gà & trứng khìa', en: 'Chicken giblets, drumstick & braised egg', img: 'images/item1.jpg' },
+      { vi: 'Xá xíu & ba rọi muối & trứng khìa', en: 'Char siu, salted pork belly & braised egg', img: 'images/item2.jpeg' },
+      { vi: 'Heo quay & trứng khìa', en: 'Crispy roast pork & braised egg', img: 'images/item3.jpeg' },
+    ]
+  },
+  {
+    cat: 'Bánh mì Việt Nam', catEn: 'Vietnamese bánh mì', emoji: '🥖', price: 11, unit: 'ổ', unitEn: 'loaf',
+    items: [
+      { vi: 'Bánh mì cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item4.jpg' },
+      { vi: 'Bánh mì Cô Lan', en: 'Bếp Cô Lan house special', img: 'images/item5.jpg', badge: 'Đặc biệt / Special' },
+      { vi: 'Bánh mì xá xíu', en: 'Char siu (Chinese BBQ pork)', img: 'images/item6.jpeg' },
+      { vi: 'Bánh mì xíu mại', en: 'Vietnamese pork meatballs', img: 'images/item7.jpg' },
+      { vi: 'Bánh mì phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item8.jpg' },
+      { vi: 'Bánh mì thịt nướng', en: 'Grilled pork', img: 'images/item9.jpeg' },
+      { vi: 'Bánh mì heo quay', en: 'Crispy roast pork', img: 'images/item10.jpeg' },
+      { vi: 'Bánh mì lòng gà xé', en: 'Shredded chicken giblets', img: 'images/item11.jpeg' },
+    ]
+  },
+  {
+    cat: 'Xôi', catEn: 'Sticky rice', emoji: '🍚', price: 19, unit: 'hộp', unitEn: 'box',
+    items: [
+      { vi: 'Xôi lòng gà & đùi gà & trứng khìa', en: 'Chicken giblets, drumstick & braised egg', img: 'images/item12.jpeg' },
+      { vi: 'Xôi thập cẩm', en: 'Mixed toppings', img: 'images/item13.jpeg' },
+      { vi: 'Xôi phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item14.jpeg' },
+      { vi: 'Xôi heo quay & trứng khìa', en: 'Crispy roast pork & braised egg', img: 'images/item15.jpeg' },
+      { vi: 'Xôi cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item16.jpg' },
+    ]
+  },
+  {
+    cat: 'Bún', catEn: 'Rice vermicelli', emoji: '🍲', price: 19, unit: 'hộp', unitEn: 'box',
+    items: [
+      { vi: 'Bún thịt nướng & chả giò', en: 'Grilled pork & spring rolls', img: 'images/item17.jpeg' },
+      { vi: 'Bún cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item18.jpeg' },
+      { vi: 'Bún phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item19.jpeg' },
+      { vi: 'Bún heo quay', en: 'Crispy roast pork', img: 'images/item20.jpg' },
+    ]
+  },
+];
+
+const CUSTOM_TAGS = [
+  { vi: 'Hành & ngò', en: 'Green onion & cilantro' },
+  { vi: 'Pate', en: 'Pâté' },
+  { vi: 'Bơ sốt', en: 'Butter mayo' },
+  { vi: 'Ớt', en: 'Chili' },
+  { vi: 'Nước mắm & nước sốt', en: 'Fish sauce & sauces' },
+];
+
+/* ═══════════ BUILD MENU ═══════════ */
+const menuRoot = document.getElementById('menuRoot');
+MENU.forEach(function(group) {
+  const cat = document.createElement('div');
+  cat.className = 'menu-cat';
+  cat.innerHTML =
+    '<div class="menu-cat-bar">' +
+      '<span class="emoji">' + group.emoji + '</span>' +
+      '<div class="cat-names"><div class="cat-vi">' + group.cat + '</div>' +
+        '<div class="cat-en">' + group.catEn + '</div></div>' +
+      '<div class="price-badge"><b>$' + group.price + '</b>' +
+        '<small><span data-lang="vi">1 ' + group.unit + '</span>' +
+        '<span data-lang="en">per ' + group.unitEn + '</span></small></div>' +
+    '</div>';
+  const grid = document.createElement('div');
+  grid.className = 'dish-grid';
+  group.items.forEach(function(it) {
+    const id = group.cat + '::' + it.vi;
+    const dish = document.createElement('article');
+    dish.className = 'dish';
+    const photo = it.img
+      ? '<div class="dish-photo" style="background-image:url(\'' + it.img + '\')">' +
+          (it.badge ? '<span class="dish-badge">' + it.badge + '</span>' : '') + '</div>'
+      : '<div class="dish-photo ph"><span class="ph-emoji">' + (it.emoji || group.emoji) + '</span>' +
+          (it.badge ? '<span class="dish-badge">' + it.badge + '</span>' : '') + '</div>';
+    dish.innerHTML = photo +
+      '<div class="dish-body">' +
+        '<h4 class="dish-name">' + it.vi + '</h4>' +
+        '<p class="dish-en">' + it.en + '</p>' +
+        '<div class="dish-foot"><span class="dish-price">$' + group.price + '</span>' +
+          '<button class="add-btn" type="button"><span data-lang="vi">Thêm</span><span data-lang="en">Add</span></button></div>' +
+      '</div>';
+    dish.querySelector('.add-btn').addEventListener('click', function() {
+      addToCart(id, it.vi, group.cat, group.price);
+    });
+    grid.appendChild(dish);
+  });
+  cat.appendChild(grid);
+  menuRoot.appendChild(cat);
+});
+
+/* custom tags */
+const tagWrap = document.getElementById('customTags');
+CUSTOM_TAGS.forEach(function(t) {
+  const s = document.createElement('span');
+  s.innerHTML = '<span data-lang="vi">' + t.vi + '</span><span data-lang="en">' + t.en + '</span>';
+  tagWrap.appendChild(s);
+});
+
+/* ═══════════ CART LOGIC ═══════════ */
+const cart = {};
+const DELIVERY_MIN = 50;
+
+function addToCart(id, name, cat, price) {
+  if (cart[id]) cart[id].qty++;
+  else cart[id] = { name: name, cat: cat, price: price, qty: 1 };
+  renderCart();
+}
+function changeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty += delta;
+  if (cart[id].qty <= 0) delete cart[id];
+  renderCart();
+}
+
+function renderCart() {
+  const list = document.getElementById('cartItems');
+  const ids = Object.keys(cart);
+  list.innerHTML = '';
+  if (ids.length === 0) {
+    list.innerHTML = '<li class="empty"><span data-lang="vi">Chưa có món nào — nhấn "+ Thêm" ở thực đơn.</span><span data-lang="en">No items yet — tap "+ Add" on the menu above.</span></li>';
+  }
+  let subtotal = 0;
+  ids.forEach(function(id) {
+    const it = cart[id];
+    subtotal += it.price * it.qty;
+    const li = document.createElement('li');
+    li.className = 'cart-row';
+    li.innerHTML =
+      '<div class="cr-name">' + it.name + '<small>' + it.cat + ' · $' + it.price + '</small></div>' +
+      '<div class="qty-ctrl">' +
+        '<button type="button" data-act="minus">−</button>' +
+        '<span class="qv">' + it.qty + '</span>' +
+        '<button type="button" data-act="plus">+</button>' +
+      '</div>' +
+      '<div class="cr-price">$' + (it.price * it.qty) + '</div>';
+    li.querySelector('[data-act="minus"]').addEventListener('click', function(){ changeQty(id, -1); });
+    li.querySelector('[data-act="plus"]').addEventListener('click', function(){ changeQty(id, 1); });
+    list.appendChild(li);
+  });
+
+  document.getElementById('subtotal').textContent = '$' + subtotal;
+  document.getElementById('grandTotal').textContent = '$' + subtotal;
+
+  const isDelivery = document.getElementById('ff-delivery').checked;
+  document.getElementById('deliveryLine').textContent = isDelivery ? '$5–$10*' : '—';
+  document.getElementById('deliveryNote').style.display = isDelivery ? 'block' : 'none';
+  updateDeliveryWarn(subtotal);
+  return subtotal;
+}
+
+function updateDeliveryWarn(subtotal) {
+  const isDelivery = document.getElementById('ff-delivery').checked;
+  const warn = document.getElementById('deliveryWarn');
+  if (isDelivery && subtotal > 0 && subtotal < DELIVERY_MIN) warn.classList.add('show');
+  else warn.classList.remove('show');
+}
+
+document.querySelectorAll('input[name="fulfillment"]').forEach(function(r) {
+  r.addEventListener('change', function() {
+    document.getElementById('deliveryFields').classList.toggle('show', document.getElementById('ff-delivery').checked);
+    renderCart();
+  });
+});
+
+/* ═══════════ PICKUP DAY / TIME OPTIONS ═══════════ */
+(function buildPickupOptions() {
+  const openDays = [1, 5, 6]; // Mon, Fri, Sat
+  const dayNamesVi = ['Chủ Nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
+  const daySel = document.getElementById('pickupDay');
+  const ph = document.createElement('option');
+  ph.value = ''; ph.textContent = '— Chọn ngày / Choose day —';
+  daySel.appendChild(ph);
+  const today = new Date();
+  let added = 0;
+  for (let i = 0; i < 21 && added < 6; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    if (openDays.indexOf(d.getDay()) === -1) continue;
+    const label = dayNamesVi[d.getDay()] + ' / ' +
+      d.toLocaleDateString('en-CA', { weekday: 'short' }) + ', ' +
+      d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }) +
+      (i === 0 ? ' (hôm nay / today)' : '');
+    const opt = document.createElement('option');
+    opt.value = d.toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+    opt.textContent = label;
+    daySel.appendChild(opt);
+    added++;
+  }
+  const timeSel = document.getElementById('pickupTime');
+  const tph = document.createElement('option');
+  tph.value = ''; tph.textContent = '— Chọn giờ / Choose time —';
+  timeSel.appendChild(tph);
+  for (let h = 9; h <= 18; h++) {
+    ['00','30'].forEach(function(m) {
+      const hr12 = h > 12 ? h - 12 : h;
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const opt = document.createElement('option');
+      opt.value = hr12 + ':' + m + ' ' + ampm;
+      opt.textContent = hr12 + ':' + m + ' ' + ampm;
+      timeSel.appendChild(opt);
+    });
+  }
+})();
+
+/* ═══════════ SUBMIT ═══════════ */
+document.getElementById('orderForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const subtotal = renderCart();
+  const ids = Object.keys(cart);
+
+  if (ids.length === 0) {
+    alert('Vui lòng chọn ít nhất một món.\nPlease add at least one item to your order.');
+    return;
+  }
+  const isDelivery = document.getElementById('ff-delivery').checked;
+  if (isDelivery && subtotal < DELIVERY_MIN) {
+    alert('Giao hàng áp dụng cho đơn từ $' + DELIVERY_MIN + ' trở lên.\nDelivery requires a minimum order of $' + DELIVERY_MIN + '.');
+    return;
+  }
+  const address = form.address.value.trim();
+  if (isDelivery && !address) {
+    alert('Vui lòng nhập địa chỉ giao hàng.\nPlease enter a delivery address.');
+    return;
+  }
+
+  let lines = [];
+  ids.forEach(function(id) {
+    const it = cart[id];
+    lines.push('  • ' + it.qty + ' x ' + it.name + ' (' + it.cat + ') = $' + (it.price * it.qty));
+  });
+  const summary =
+    'MON DAT / ITEMS:\n' + lines.join('\n') +
+    '\n\nTam tinh / Subtotal: $' + subtotal +
+    (isDelivery ? '\nGiao hang / Delivery: $5-$10 (confirm by distance)' : '') +
+    '\nTONG MON / FOOD TOTAL: $' + subtotal;
+  document.getElementById('orderSummaryField').value = summary;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi… / Sending…';
+
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: '🍜 Đơn hàng mới / New order – ' + form.name.value + ' (' + (isDelivery ? 'DELIVERY' : 'PICKUP') + ')',
+    from_name: 'Website Linh Quán Việt',
+    'Ten khach / Name': form.name.value,
+    'Dien thoai / Phone': form.phone.value,
+    'Email': form.email.value || '(none)',
+    'Ngay lay / Pickup day': form.pickupDay.value,
+    'Gio lay / Pickup time': form.pickupTime.value,
+    'Hinh thuc / Type': form.fulfillment.value,
+    'Dia chi / Address': isDelivery ? address : '(pickup)',
+    'Ghi chu / Notes': form.notes.value || '(none)',
+    'CHI TIET DON / ORDER': summary,
+    botcheck: ''
+  };
+
+  if (WEB3FORMS_KEY === 'PASTE-YOUR-WEB3FORMS-KEY-HERE') {
+    console.log('DEMO ORDER (no Web3Forms key set):', payload);
+    showSuccess(form, isDelivery, true);
+    return;
+  }
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Send failed');
+    showSuccess(form, isDelivery, false);
+  } catch (err) {
+    btn.disabled = false;
+    btn.innerHTML = '<span data-lang="vi">Gửi đơn hàng</span><span data-lang="en">Send Order</span>';
+    alert('Xin lỗi, có lỗi khi gửi đơn. Vui lòng gọi 250-891-3749.\nSorry, something went wrong. Please call us at 250-891-3749.');
+  }
+});
+
+function showSuccess(form, isDelivery, demo) {
+  document.getElementById('orderForm').style.display = 'none';
+  const en = document.body.classList.contains('en');
+  const msg = en
+    ? ('Your order has been sent to the kitchen' + (demo ? ' (demo mode — Web3Forms key not set yet)' : '') +
+       '. We\'ll call/text <strong>' + form.phone.value + '</strong> to confirm' +
+       (isDelivery ? ' and let you know the delivery fee.' : '.'))
+    : ('Đơn hàng của bạn đã được gửi tới bếp' + (demo ? ' (chế độ demo — chưa cài Web3Forms key)' : '') +
+       '. Chúng tôi sẽ gọi/nhắn tin tới <strong>' + form.phone.value + '</strong> để xác nhận' +
+       (isDelivery ? ' và báo phí giao hàng.' : '.'));
+  document.getElementById('successMsg').innerHTML = msg;
+  document.getElementById('orderSuccess').classList.add('show');
+  document.getElementById('orderSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ═══════════ LANGUAGE TOGGLE ═══════════ */
+const langBtn = document.getElementById('langBtn');
+function setLang(l) {
+  document.body.classList.toggle('en', l === 'en');
+  document.documentElement.lang = l;
+  langBtn.textContent = (l === 'en') ? 'Tiếng Việt' : 'English';
+  try { localStorage.setItem('lqv_lang', l); } catch (e) {}
+}
+langBtn.addEventListener('click', function() {
+  setLang(document.body.classList.contains('en') ? 'vi' : 'en');
+});
+(function initLang() {
+  let saved = 'vi';
+  try { saved = localStorage.getItem('lqv_lang') || 'vi'; } catch (e) {}
+  setLang(saved);
+})();
+
+/* ═══════════ NAV ═══════════ */
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(function(a) {
+  a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); });
+});
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
