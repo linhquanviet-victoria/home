@@ -166,6 +166,10 @@ section { scroll-margin-top: 86px; }
 .cart-totals .tline { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
 .cart-totals .tline.grand { font-size: 1.3rem; font-weight: 900; color: var(--red); }
 .cart-totals .note { font-size: 0.82rem; color: var(--text-mid); background: #f4f9f4; border-radius: var(--radius-md); padding: 8px 12px; margin-top: 8px; }
+.add-more-link { display: block; text-align: center; margin-top: 16px; color: var(--green); font-weight: 800; font-size: 0.9rem; text-decoration: none; padding: 10px; border: 1.5px dashed var(--green); border-radius: var(--radius-pill); transition: all 0.2s; }
+.add-more-link:hover { background: var(--green); color: var(--white); }
+@keyframes cartPulse { 0% { box-shadow: 0 0 0 0 rgba(200,54,44,0.55); } 100% { box-shadow: 0 0 0 16px rgba(200,54,44,0); } }
+#orderSummaryCard.just-added { animation: cartPulse 0.75s ease-out; border-color: var(--red); }
 .form-row { margin-bottom: 15px; }
 .form-row label { display: block; font-size: 0.78rem; font-weight: 800; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .form-row input, .form-row select, .form-row textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--cream-2); border-radius: var(--radius-md); font-family: inherit; font-size: 0.95rem; background: var(--white); color: var(--text); transition: border-color 0.2s; }
@@ -344,7 +348,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
 
     <div class="order-grid">
       <!-- CART -->
-      <div class="order-card">
+      <div class="order-card" id="orderSummaryCard">
         <h3>🛒 <span data-lang="vi">Đơn hàng của bạn</span><span data-lang="en">Your order</span></h3>
         <p class="sub"><span data-lang="vi">Tóm tắt đơn hàng</span><span data-lang="en">Order summary</span></p>
         <ul id="cartItems">
@@ -356,6 +360,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
           <div class="tline grand"><span data-lang="vi">Tổng món</span><span data-lang="en">Food total</span><span id="grandTotal">$0</span></div>
           <div class="note" id="deliveryNote" style="display:none;">🚗 <span data-lang="vi">Giao hàng cho đơn từ <strong>$50</strong> trở lên. Phí giao <strong>$5–$10</strong> tùy khoảng cách, bếp sẽ báo lại khi xác nhận đơn.</span><span data-lang="en">Delivery for orders <strong>$50+</strong>. Delivery fee <strong>$5–$10</strong> by distance — we'll confirm it when we call.</span></div>
         </div>
+        <a href="#menu" class="add-more-link">＋ <span data-lang="vi">Thêm món khác</span><span data-lang="en">Add more items</span></a>
       </div>
 
       <!-- FORM -->
@@ -500,7 +505,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
    3. Paste it below (replace the placeholder).
    Until then, orders run in DEMO mode and are NOT emailed.
 ═══════════════════════════════════════════════ */
-const WEB3FORMS_KEY = 'PASTE-YOUR-WEB3FORMS-KEY-HERE';
+const WEB3FORMS_KEY = 'a7e4654d-b60c-4cd0-9db4-5a61416fa3fb';
 
 /* ═══════════ MENU DATA (bilingual) ═══════════ */
 // Each item uses images/item<N>.<ext> — the N matches the item's position in the menu (1–20).
@@ -613,6 +618,14 @@ function addToCart(id, name, cat, price) {
   if (cart[id]) cart[id].qty++;
   else cart[id] = { name: name, cat: cat, price: price, qty: 1 };
   renderCart();
+  // Take the customer to the "Your order" summary so they see the item was added
+  const card = document.getElementById('orderSummaryCard');
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.remove('just-added');
+    void card.offsetWidth;            // restart the highlight animation
+    card.classList.add('just-added');
+  }
 }
 function changeQty(id, delta) {
   if (!cart[id]) return;
