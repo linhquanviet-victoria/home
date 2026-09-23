@@ -135,6 +135,8 @@ section { scroll-margin-top: 86px; }
 .dish-body { padding: 14px 15px 16px; display: flex; flex-direction: column; flex: 1; }
 .dish-name { font-size: 1rem; color: var(--text); line-height: 1.25; margin-bottom: 3px; }
 .dish-en { font-size: 0.8rem; color: var(--text-light); font-weight: 600; margin-bottom: 12px; flex: 1; }
+.dish-en:has(+ .dish-desc) { flex: 0; margin-bottom: 8px; }
+.dish-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 12px; flex: 1; }
 .dish-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .dish-price { font-size: 1.1rem; font-weight: 900; color: var(--red); }
 .add-btn { background: var(--green); color: var(--white); border: none; padding: 8px 14px; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 800; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
@@ -568,14 +570,30 @@ const MENU = [
   {
     cat: 'Bánh mì Việt Nam', catEn: 'Vietnamese bánh mì', emoji: '🥖', price: 11, unit: 'ổ', unitEn: 'loaf',
     items: [
-      { vi: 'Bánh mì cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item4.jpg' },
-      { vi: 'Bánh mì Cô Lan', en: 'Bếp Cô Lan house special', img: 'images/item5.jpg', badge: 'Đặc biệt / Special' },
-      { vi: 'Bánh mì xá xíu', en: 'Char siu (Chinese BBQ pork)', img: 'images/item6.jpeg' },
-      { vi: 'Bánh mì xíu mại', en: 'Vietnamese pork meatballs', img: 'images/item7.jpg' },
-      { vi: 'Bánh mì phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item8.jpg' },
-      { vi: 'Bánh mì thịt nướng', en: 'Grilled pork', img: 'images/item9.jpeg' },
-      { vi: 'Bánh mì heo quay', en: 'Crispy roast pork', img: 'images/item10.jpeg' },
-      { vi: 'Bánh mì lòng gà xé', en: 'Shredded chicken giblets', img: 'images/item11.jpeg' },
+      { vi: 'Bánh mì cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item4.jpg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, thêm cá nục kho riệu đậm đà, thấm vị cùng nước sốt riêng đặc trưng của Bếp Cô Lan.',
+        descEn: "Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with flavourful braised mackerel and Bếp Cô Lan's signature sauce." },
+      { vi: 'Bánh mì Cô Lan', en: 'Bếp Cô Lan house special', img: 'images/item5.jpg', badge: 'Đặc biệt / Special',
+        descVi: 'Ổ bánh mì đầy đặn với pate béo mịn, bơ sốt đặc biệt, dưa leo, dưa chua, chả lụa, ba rọi muối, xá xíu và xíu mại, hoàn thiện với hành ngò tươi.',
+        descEn: 'A generously filled bánh mì with rich pâté, our special butter spread, cucumber, pickled vegetables, Vietnamese pork roll (chả lụa), salted pork belly, char siu BBQ pork and pork meatballs, finished with fresh green onion and cilantro.' },
+      { vi: 'Bánh mì xá xíu', en: 'Char siu (Chinese BBQ pork)', img: 'images/item6.jpeg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, bên trong là xá xíu mềm thơm, đậm đà.',
+        descEn: 'Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with tender, savoury char siu BBQ pork.' },
+      { vi: 'Bánh mì xíu mại', en: 'Vietnamese pork meatballs', img: 'images/item7.jpg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, bên trong là xíu mại mềm thơm, đậm đà trong sốt cà chua theo hương vị Sài Gòn.',
+        descEn: 'Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with tender pork meatballs simmered in a Saigon-style tomato sauce.' },
+      { vi: 'Bánh mì phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item8.jpg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, bên trong là phá lấu đậm đà, thơm béo và thấm vị, thêm trứng cút khìa cùng nước sốt riêng của Bếp Cô Lan.',
+        descEn: "Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with rich, savoury slow-braised phá lấu, plus braised quail eggs and Bếp Cô Lan's signature sauce." },
+      { vi: 'Bánh mì thịt nướng', en: 'Grilled pork', img: 'images/item9.jpeg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, bên trong là thịt nướng thơm lừng, mềm thơm và đậm đà, cùng nước sốt riêng của Bếp Cô Lan. Hoàn thiện với hành ngò tươi, tạo nên một ổ bánh mì thơm ngon, hài hòa và trọn vị.',
+        descEn: "Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with fragrant, tender grilled pork and Bếp Cô Lan's signature sauce. Finished with fresh green onion and cilantro for a perfectly balanced, flavourful bánh mì." },
+      { vi: 'Bánh mì heo quay', en: 'Crispy roast pork', img: 'images/item10.jpeg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, bên trong là heo quay thơm ngon, thịt mềm đậm đà cùng lớp da giòn hấp dẫn.',
+        descEn: 'Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, filled with tender, flavourful roast pork with irresistibly crispy skin.' },
+      { vi: 'Bánh mì lòng gà xé', en: 'Shredded chicken giblets', img: 'images/item11.jpeg',
+        descVi: 'Bánh mì giòn thơm kết hợp cùng pate béo mịn, bơ sốt đặc biệt, dưa leo và dưa chua, cùng lòng gà đậm đà và gà xé mềm thơm.',
+        descEn: 'Crispy baguette with smooth, rich pâté, our special butter spread, cucumber and pickled vegetables, with savoury chicken giblets and tender shredded chicken.' },
     ]
   },
   {
@@ -636,6 +654,7 @@ MENU.forEach(function(group) {
       '<div class="dish-body">' +
         '<h4 class="dish-name">' + it.vi + '</h4>' +
         '<p class="dish-en">' + it.en + '</p>' +
+        (it.descVi ? '<p class="dish-desc"><span data-lang="vi">' + it.descVi + '</span><span data-lang="en">' + it.descEn + '</span></p>' : '') +
         '<div class="dish-foot"><span class="dish-price">$' + group.price + '</span>' +
           '<button class="add-btn" type="button"><span data-lang="vi">Thêm</span><span data-lang="en">Add</span></button></div>' +
       '</div>';
