@@ -76,7 +76,7 @@ nav {
 .hamburger span { display: block; width: 26px; height: 2.5px; background: var(--green); border-radius: 4px; transition: all 0.3s; }
 
 /* ═══════════ HERO ═══════════ */
-.hero { position: relative; overflow: hidden; background: linear-gradient(140deg, rgba(18,58,34,0.9) 0%, rgba(18,58,34,0.72) 55%, rgba(18,58,34,0.85) 100%), url('images/background.jpeg') center / cover no-repeat; background-color: var(--green-deep); color: var(--white); }
+.hero { position: relative; overflow: hidden; background: linear-gradient(140deg, var(--green-deep) 0%, var(--green) 55%, var(--green-dark) 100%); color: var(--white); }
 .hero::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 15%, rgba(224,169,39,0.22), transparent 45%); pointer-events:none; }
 .hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 68px 24px 78px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
 .hero-badge { display: inline-block; background: rgba(224,169,39,0.18); border: 1px solid rgba(224,169,39,0.55); color: #ffe6a8; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: 18px; font-weight: 800; }
@@ -91,7 +91,16 @@ nav {
 .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.6); }
 .btn-outline:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
 .hero-img-wrap { position: relative; }
-.hero-img-wrap img.food { border-radius: var(--radius-xl); box-shadow: 0 22px 54px rgba(0,0,0,0.4); border: 4px solid rgba(224,169,39,0.6); width: 100%; height: 440px; object-fit: cover; }
+.hero-slides { position: relative; overflow: hidden; border-radius: var(--radius-xl); box-shadow: 0 22px 54px rgba(0,0,0,0.4); border: 4px solid rgba(224,169,39,0.6); height: 440px; background: var(--green-deep); }
+.hero-slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.hero-slides img.active { opacity: 1; }
+.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(0,0,0,0.38); color: var(--white); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.hero-arrow:hover { background: rgba(0,0,0,0.6); }
+.hero-arrow.prev { left: 12px; }
+.hero-arrow.next { right: 12px; }
+.hero-dots { position: absolute; bottom: 12px; right: 16px; z-index: 2; display: flex; gap: 6px; }
+.hero-dots button { width: 9px; height: 9px; padding: 0; border-radius: 50%; border: none; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; }
+.hero-dots button.active { background: var(--gold); width: 22px; border-radius: var(--radius-pill); }
 .hero-logo-float { position: absolute; bottom: -24px; left: -22px; width: 112px; height: 112px; border-radius: 50%; border: 4px solid var(--white); box-shadow: var(--shadow); background: var(--white); object-fit: cover; }
 
 /* ═══════════ SECTIONS ═══════════ */
@@ -309,7 +318,26 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
       </div>
     </div>
     <div class="hero-img-wrap">
-      <img src="images/spread1.jpg" class="food" alt="Homemade Vietnamese dishes from Bếp Cô Lan">
+      <div class="hero-slides" id="heroSlides">
+        <img src="images/background.jpeg" class="active" alt="Bếp Cô Lan display case">
+        <img data-src="images/spread1.jpg" alt="Homemade Vietnamese dishes from Bếp Cô Lan">
+        <img data-src="images/banhmi-thit-nuong.jpeg" alt="Bánh mì thịt nướng · grilled pork">
+        <img data-src="images/spread2.jpg" alt="Vietnamese dishes spread">
+        <img data-src="images/banhmi-heo-quay.jpeg" alt="Bánh mì heo quay · crispy roast pork">
+        <img data-src="images/gia_vi.jpeg" alt="Gia vị · homemade sauces and toppings">
+        <img data-src="images/banhmi-xa-xiu.jpeg" alt="Bánh mì xá xíu · char siu">
+        <img data-src="images/meatballs.jpg" alt="Chả · grilled pork meatballs">
+        <img data-src="images/banhmi-xiu-mai.jpeg" alt="Bánh mì xíu mại · Saigon meatballs">
+        <img data-src="images/shredded.jpg" alt="Shredded pork">
+        <img data-src="images/item8.jpg" alt="Bánh mì phá lấu">
+        <img data-src="images/xiumai-raw.jpg" alt="Xíu mại · pork meatballs prep">
+        <img data-src="images/banhmi-ca-nuc.jpeg" alt="Bánh mì cá nục kho riệu · braised mackerel">
+        <img data-src="images/pate.jpg" alt="Pâté · homemade">
+        <img data-src="images/banhmi-long-ga.jpeg" alt="Bánh mì lòng gà & gà xé · chicken">
+        <button class="hero-arrow prev" id="heroPrev" aria-label="Previous photo">&#8249;</button>
+        <button class="hero-arrow next" id="heroNext" aria-label="Next photo">&#8250;</button>
+        <div class="hero-dots" id="heroDots"></div>
+      </div>
       <img src="images/logo.jpg" class="hero-logo-float" alt="Logo">
     </div>
   </div>
@@ -1017,6 +1045,42 @@ document.querySelectorAll('#navLinks a').forEach(function(a) {
   a.addEventListener('click', function() { document.getElementById('navLinks').classList.remove('open'); });
 });
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ═══════════ HERO SLIDESHOW ═══════════ */
+(function heroSlideshow() {
+  const slides = Array.from(document.querySelectorAll('#heroSlides img'));
+  const dotsBox = document.getElementById('heroDots');
+  const DELAY = 4000;
+  let cur = 0, timer = null;
+  // Load a slide's photo only when it's about to be shown
+  function load(i) {
+    const img = slides[i];
+    if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+  }
+  const dots = slides.map(function(_, i) {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Photo ' + (i + 1));
+    b.addEventListener('click', function() { show(i); restart(); });
+    dotsBox.appendChild(b);
+    return b;
+  });
+  function show(i) {
+    load(i);
+    load((i + 1) % slides.length);
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+    cur = i;
+    slides[cur].classList.add('active'); dots[cur].classList.add('active');
+  }
+  function restart() {
+    clearInterval(timer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(function() { show((cur + 1) % slides.length); }, DELAY);
+  }
+  document.getElementById('heroPrev').addEventListener('click', function() { show((cur - 1 + slides.length) % slides.length); restart(); });
+  document.getElementById('heroNext').addEventListener('click', function() { show((cur + 1) % slides.length); restart(); });
+  show(0);
+  restart();
+})();
 </script>
 </body>
 </html>
