@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Linh Quán Việt – Bếp Cô Lan. Traditional homemade Vietnamese food in Victoria, BC. Bánh mì, xôi, bún, mì gói trộn. Order online for pickup or delivery. 1012 Tillicum Road.">
-<meta name="keywords" content="Vietnamese food Victoria BC, banh mi Victoria, homemade Vietnamese food, Linh Quan Viet, Bep Co Lan, Tillicum Road, xoi, bun">
+<meta name="description" content="Linh Quán Việt – Bếp Cô Lan. Traditional homemade Vietnamese food in Victoria, BC. Bánh mì, cơm tấm. Order online for pickup or delivery. 1012 Tillicum Road.">
+<meta name="keywords" content="Vietnamese food Victoria BC, banh mi Victoria, homemade Vietnamese food, Linh Quan Viet, Bep Co Lan, Tillicum Road, com tam, broken rice">
 <meta property="og:title" content="Linh Quán Việt – Bếp Cô Lan | Homemade Vietnamese Food">
 <meta property="og:description" content="Traditional homemade Vietnamese food in Victoria, BC. Order online for pickup or delivery.">
 <meta property="og:type" content="website">
@@ -133,6 +133,7 @@ section { scroll-margin-top: 86px; }
 .menu-cat-bar .price-badge { margin-left: auto; background: var(--red); color: var(--white); font-weight: 900; text-align: center; padding: 8px 18px; border-radius: var(--radius-md); white-space: nowrap; line-height: 1.1; }
 .menu-cat-bar .price-badge b { font-size: 1.35rem; display: block; }
 .menu-cat-bar .price-badge small { font-size: 0.68rem; opacity: 0.9; }
+.menu-cat-note { margin: -10px 0 18px; font-weight: 800; color: var(--red); }
 .dish-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .dish { background: var(--white); border: 1.5px solid var(--cream-2); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all 0.2s; }
 .dish:hover { border-color: var(--gold); box-shadow: var(--shadow-sm); transform: translateY(-3px); }
@@ -148,6 +149,7 @@ section { scroll-margin-top: 86px; }
 .dish-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 12px; flex: 1; }
 .dish-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .dish-price { font-size: 1.1rem; font-weight: 900; color: var(--red); }
+.dish-price .dish-unit { font-size: 0.8rem; font-weight: 700; color: var(--text-light); }
 .add-btn { background: var(--green); color: var(--white); border: none; padding: 8px 14px; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 800; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
 .add-btn:hover { background: var(--green-dark); transform: scale(1.05); }
 .add-btn::before { content: "+ "; font-size: 1rem; }
@@ -232,6 +234,14 @@ section { scroll-margin-top: 86px; }
 .gallery-grid img, .gallery-grid video { width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 0.3s; background: #000; display: block; }
 .gallery-grid img:hover { transform: translateY(-4px) scale(1.02); }
 .gallery-grid .tall { grid-row: span 2; height: 100%; }
+.yt-block { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
+.yt-short { width: 100%; max-width: 320px; aspect-ratio: 9 / 16; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); background: #000; }
+.yt-short iframe { width: 100%; height: 100%; border: 0; display: block; }
+.yt-text { max-width: 380px; }
+.yt-text h3 { color: var(--green); font-size: 1.5rem; margin-bottom: 8px; }
+.yt-text p { margin-bottom: 18px; }
+.btn-yt { display: inline-flex; align-items: center; gap: 8px; background: #FF0000; color: #fff; font-weight: 800; padding: 12px 22px; border-radius: 999px; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+.btn-yt:hover { transform: translateY(-2px); }
 
 /* ═══════════ CONTACT ═══════════ */
 #contact { background: var(--green-deep); color: var(--cream); }
@@ -307,8 +317,8 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
       <span class="hero-badge">🇻🇳 Victoria, BC · <span data-lang="vi">Món Việt làm tại nhà</span><span data-lang="en">Homemade Vietnamese food</span></span>
       <h1>Linh Quán Việt</h1>
       <div class="script-sub">Bếp Cô Lan</div>
-      <p class="lead" data-lang="vi">Bánh mì, xôi, bún và mì gói trộn — tất cả đều nấu tươi mỗi ngày mở bán, theo đúng khẩu vị của bạn. ❤️</p>
-      <p class="lead" data-lang="en">Bánh mì, sticky rice, vermicelli & mixed noodles — all cooked fresh every open day, made just the way you like it. ❤️</p>
+      <p class="lead" data-lang="vi">Bánh mì và cơm tấm — tất cả đều nấu tươi mỗi ngày mở bán, theo đúng khẩu vị của bạn. ❤️</p>
+      <p class="lead" data-lang="en">Bánh mì & broken rice — all cooked fresh every open day, made just the way you like it. ❤️</p>
       <p class="lead" style="font-size:0.98rem;opacity:0.9;" data-lang="vi">Traditional Vietnamese food, homemade with love.</p>
       <p class="lead" style="font-size:0.98rem;opacity:0.9;" data-lang="en">Món Việt truyền thống, làm tại nhà bằng cả tấm lòng.</p>
       <div class="hours-pill">⏰ <span data-lang="vi">Thứ 6 · Thứ 7 · Thứ 2</span><span data-lang="en">Fri · Sat · Mon</span> &nbsp;|&nbsp; 9:00 AM – 7:00 PM</div>
@@ -516,6 +526,16 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
       <img src="images/xiumai-raw.jpg" alt="Xíu mại · pork meatballs prep">
       <img src="images/pate.jpg" alt="Pâté · homemade">
     </div>
+    <div class="yt-block">
+      <div class="yt-short">
+        <iframe src="https://www.youtube-nocookie.com/embed/hfqiQ6mmgUw" title="Bếp Cô Lan – YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="yt-text">
+        <h3><span data-lang="vi">Xem Bếp Cô Lan trên YouTube</span><span data-lang="en">Watch Bếp Cô Lan on YouTube</span></h3>
+        <p><span data-lang="vi">Xem cách bếp nấu món mỗi ngày — nhấn đăng ký để không bỏ lỡ video mới nhé!</span><span data-lang="en">See what's cooking in our kitchen — subscribe so you never miss a new video!</span></p>
+        <a href="https://www.youtube.com/@LinhQuanViet" target="_blank" rel="noopener" class="btn-yt">▶ <span data-lang="vi">Đăng ký kênh YouTube</span><span data-lang="en">Subscribe on YouTube</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -547,6 +567,10 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
             <div class="cw-ic">📘</div>
             <div><strong>Facebook</strong><a href="https://www.facebook.com/linh.quan.victoria" target="_blank" rel="noopener">facebook.com/linh.quan.victoria</a></div>
           </div>
+          <div class="contact-way">
+            <div class="cw-ic">▶️</div>
+            <div><strong>YouTube</strong><a href="https://www.youtube.com/@LinhQuanViet" target="_blank" rel="noopener">youtube.com/@LinhQuanViet</a></div>
+          </div>
         </div>
       </div>
       <div class="map-embed">
@@ -562,6 +586,7 @@ footer .fb-link { display: inline-block; margin-top: 14px; color: var(--gold); f
   <p><strong>Linh Quán Việt</strong> · <span data-lang="vi">Món Việt truyền thống làm tại nhà</span><span data-lang="en">Traditional homemade Vietnamese food</span> 🇻🇳❤️</p>
   <p>1012 Tillicum Road, Victoria, BC · 250-891-3749 · linhquanviet@gmail.com</p>
   <a href="https://www.facebook.com/linh.quan.victoria" target="_blank" rel="noopener" class="fb-link">📘 <span data-lang="vi">Theo dõi trên Facebook</span><span data-lang="en">Follow us on Facebook</span></a>
+  &nbsp;·&nbsp; <a href="https://www.youtube.com/@LinhQuanViet" target="_blank" rel="noopener" class="fb-link">▶️ <span data-lang="vi">Kênh YouTube</span><span data-lang="en">YouTube channel</span></a>
   <p style="margin-top:16px;font-size:0.8rem;opacity:0.7;">© <span id="year"></span> Linh Quán Việt. All rights reserved.</p>
 </footer>
 
@@ -585,17 +610,10 @@ const WEB3FORMS_KEY = 'a7e4654d-b60c-4cd0-9db4-5a61416fa3fb';
 const CALENDAR_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyVwcWB7G6WY49-S60TelYtVezzWMnHa0A2y8aga0VqTqRWrLxbRALdyT1V8dR261qv/exec';
 
 /* ═══════════ MENU DATA (bilingual) ═══════════ */
-// Each item uses images/item<N>.<ext> — the N matches the item's position in the menu (1–20).
-// Replace any item<N> image in the images/ folder to update that dish's photo.
+// Bánh mì uses images/item4–11; cơm tấm uses images/com<N>.jpeg (+ phalau, item18). Sides use images/side-*.jpeg.
+// Replace an image file in images/ (same name) to update that dish's photo. An item without img shows an emoji placeholder.
+// An item's own `price` overrides the group price.
 const MENU = [
-  {
-    cat: 'Mì gói trộn', catEn: 'Dry-mixed instant noodles', emoji: '🍜', price: 19, unit: 'hộp', unitEn: 'box',
-    items: [
-      { vi: 'Lòng gà & đùi gà & trứng khìa', en: 'Chicken giblets, drumstick & braised egg', img: 'images/item1.jpg' },
-      { vi: 'Xá xíu & ba rọi muối & trứng khìa', en: 'Char siu, salted pork belly & braised egg', img: 'images/item2.jpeg' },
-      { vi: 'Heo quay & trứng khìa', en: 'Crispy roast pork & braised egg', img: 'images/item3.jpeg' },
-    ]
-  },
   {
     cat: 'Bánh mì Việt Nam', catEn: 'Vietnamese bánh mì', emoji: '🥖', price: 11, unit: 'ổ', unitEn: 'loaf',
     items: [
@@ -626,22 +644,37 @@ const MENU = [
     ]
   },
   {
-    cat: 'Xôi', catEn: 'Sticky rice', emoji: '🍚', price: 19, unit: 'hộp', unitEn: 'box',
+    cat: 'Cơm tấm đặc biệt', catEn: 'Vietnamese broken rice specials', emoji: '🍚', price: 22, priceFrom: true, unit: 'hộp', unitEn: 'box',
+    noteVi: '⭐ Món mới — bắt đầu phục vụ từ Thứ Sáu, 02/10/2026<br>🥣 Mỗi phần cơm có kèm 1 chén canh nhỏ', noteEn: '⭐ New — available starting Friday, October 2, 2026<br>🥣 A small bowl of soup is included with every broken rice dish',
     items: [
-      { vi: 'Xôi lòng gà & đùi gà & trứng khìa', en: 'Chicken giblets, drumstick & braised egg', img: 'images/item12.jpeg' },
-      { vi: 'Xôi thập cẩm', en: 'Mixed toppings', img: 'images/item13.jpeg' },
-      { vi: 'Xôi phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item14.jpeg' },
-      { vi: 'Xôi heo quay & trứng khìa', en: 'Crispy roast pork & braised egg', img: 'images/item15.jpeg' },
-      { vi: 'Xôi cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item16.jpg' },
+      { vi: 'Cơm tấm Long Xuyên', en: 'Long Xuyên-style broken rice', price: 22, img: 'images/com2.jpeg',
+        descVi: 'Chả hấp • thịt bì • trứng khìa • đồ chua • mỡ hành • nước mắm',
+        descEn: 'Steamed pork cake • shredded pork skin • braised egg • pickled vegetables • scallion oil • Vietnamese fish sauce' },
+      { vi: 'Cơm tấm Sài Gòn Cô Lan', en: 'Cô Lan Saigon-style broken rice', price: 24, img: 'images/com1.jpeg', badge: 'Đặc biệt / Special',
+        descVi: 'Sườn nướng • chả hấp • lạp xưởng • xíu mại • đồ chua • mỡ hành • nước mắm',
+        descEn: 'Grilled pork chop • steamed pork cake • Chinese sausage • Vietnamese meatball • pickled vegetables • scallion oil • Vietnamese fish sauce' },
+      { vi: 'Cơm phá lấu', en: 'Phá lấu (offal stew) with broken rice', price: 22, img: 'images/phalau.jpeg',
+        descVi: 'Phá lấu • trứng khìa • chả hấp • đồ chua • mỡ hành • nước mắm',
+        descEn: 'Vietnamese-style offal stew • braised egg • steamed pork cake • pickled vegetables • scallion oil • fish sauce' },
+      { vi: 'Cơm cá nục kho riệu', en: 'Braised mackerel scad with broken rice', price: 22, img: 'images/item18.jpeg',
+        descVi: '3 con cá • chả hấp • mỡ hành • đồ chua • nước mắm',
+        descEn: '3 braised mackerel • steamed pork cake • scallion oil • pickled vegetables • fish sauce' },
+      { vi: 'Cơm gà', en: 'Grilled chicken with broken rice', price: 24, img: 'images/com4.jpeg',
+        descVi: 'Đùi gà nướng • chả hấp • lạp xưởng • xíu mại • đồ chua • mỡ hành • nước mắm',
+        descEn: 'Grilled chicken thigh • steamed pork cake • Chinese sausage • Vietnamese meatball • pickled vegetables • scallion oil • fish sauce' },
+      { vi: 'Cơm heo quay', en: 'Crispy roast pork with broken rice', price: 22, img: 'images/com3.jpeg',
+        descVi: 'Heo quay • chả hấp • mỡ hành • nước mắm',
+        descEn: 'Roast pork • steamed pork cake • scallion oil • fish sauce' },
     ]
   },
   {
-    cat: 'Bún', catEn: 'Rice vermicelli', emoji: '🍲', price: 19, unit: 'hộp', unitEn: 'box',
+    cat: 'Món ăn kèm', catEn: 'Extra sides', emoji: '🍽️', price: 3, priceFrom: true, unit: 'món', unitEn: 'item',
     items: [
-      { vi: 'Bún thịt nướng & chả giò', en: 'Grilled pork & spring rolls', img: 'images/item17.jpeg' },
-      { vi: 'Bún cá nục kho riệu', en: 'Braised mackerel scad', img: 'images/item18.jpeg' },
-      { vi: 'Bún phá lấu & trứng khìa', en: 'Phá lấu stew & braised egg', img: 'images/item19.jpg' },
-      { vi: 'Bún heo quay', en: 'Crispy roast pork', img: 'images/item20.jpg' },
+      { vi: 'Lạp xưởng', en: 'Chinese sausage', price: 4, unitVi: 'cây', unitEn: 'link', emoji: '🍖', img: 'images/side-lap-xuong.jpeg' },
+      { vi: 'Chả hấp', en: 'Steamed pork cake', price: 5, unitVi: 'miếng', unitEn: 'piece', emoji: '🥚', img: 'images/side-cha-hap.jpeg' },
+      { vi: 'Heo quay', en: 'Roast pork', price: 10, unitVi: 'phần', unitEn: 'serving', emoji: '🥓', img: 'images/side-heo-quay.jpeg' },
+      { vi: 'Xíu mại trứng muối', en: 'Salted egg meatball', price: 3, unitVi: 'viên', unitEn: 'ball', emoji: '🧆', img: 'images/side-xiu-mai-trung-muoi.jpeg' },
+      { vi: 'Cá nục kho riệu', en: 'Braised mackerel scad', price: 5, unitVi: 'con', unitEn: 'fish', emoji: '🐟', img: 'images/side-ca-nuc.jpeg' },
     ]
   },
 ];
@@ -664,14 +697,18 @@ MENU.forEach(function(group) {
       '<span class="emoji">' + group.emoji + '</span>' +
       '<div class="cat-names"><div class="cat-vi">' + group.cat + '</div>' +
         '<div class="cat-en">' + group.catEn + '</div></div>' +
-      '<div class="price-badge"><b>$' + group.price + '</b>' +
+      '<div class="price-badge">' +
+        (group.priceFrom ? '<small><span data-lang="vi">từ</span><span data-lang="en">from</span></small>' : '') +
+        '<b>$' + group.price + '</b>' +
         '<small><span data-lang="vi">1 ' + group.unit + '</span>' +
         '<span data-lang="en">per ' + group.unitEn + '</span></small></div>' +
-    '</div>';
+    '</div>' +
+    (group.noteVi ? '<p class="menu-cat-note"><span data-lang="vi">' + group.noteVi + '</span><span data-lang="en">' + group.noteEn + '</span></p>' : '');
   const grid = document.createElement('div');
   grid.className = 'dish-grid';
   group.items.forEach(function(it) {
     const id = group.cat + '::' + it.vi;
+    const price = it.price || group.price;
     const dish = document.createElement('article');
     dish.className = 'dish';
     const photo = it.img
@@ -684,11 +721,12 @@ MENU.forEach(function(group) {
         '<h4 class="dish-name">' + it.vi + '</h4>' +
         '<p class="dish-en">' + it.en + '</p>' +
         (it.descVi ? '<p class="dish-desc"><span data-lang="vi">' + it.descVi + '</span><span data-lang="en">' + it.descEn + '</span></p>' : '') +
-        '<div class="dish-foot"><span class="dish-price">$' + group.price + '</span>' +
+        '<div class="dish-foot"><span class="dish-price">$' + price +
+          (it.unitVi ? '<small class="dish-unit"> / <span data-lang="vi">' + it.unitVi + '</span><span data-lang="en">' + it.unitEn + '</span></small>' : '') + '</span>' +
           '<button class="add-btn" type="button"><span data-lang="vi">Thêm</span><span data-lang="en">Add</span></button></div>' +
       '</div>';
     dish.querySelector('.add-btn').addEventListener('click', function() {
-      addToCart(id, it.vi, group.cat, group.price);
+      addToCart(id, it.vi, group.cat, price);
     });
     grid.appendChild(dish);
   });
